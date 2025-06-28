@@ -36,9 +36,9 @@ quantity DOUBLE
 NOTE : - The file extension should be alx_book_store.sql file - All SQL keywords should be in uppercase
 */
 
--- alx_book_store.sql
+CREATE DATABASE IF NOT EXISTS alx_book_store;
 
--- Use the alx_book_store database
+-- Use the newly created database
 USE alx_book_store;
 
 -- Create the Authors table
