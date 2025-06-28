@@ -69,7 +69,8 @@ from mysql.connector import errorcode # Import errorcode for specific error hand
 def create_database():
     """
     Connects to MySQL server and attempts to create the 'alx_book_store' database.
-    Handles the case where the database already exists by catching a specific error.
+    Handles the case where the database already exists by catching a specific error,
+    without printing a message for that specific case.
     """
     conn = None # Initialize conn to None for finally block safety
     cursor = None # Initialize cursor to None for finally block safety
@@ -90,13 +91,15 @@ def create_database():
             create_db_query = "CREATE DATABASE alx_book_store"
             cursor.execute(create_db_query)
 
-            # This print statement will only be reached if the database was actually created
+            # This print statement will ONLY be reached if the database was actually created
             print("Database 'alx_book_store' created successfully!")
 
     except mysql.connector.Error as err:
         # Check if the error is specifically that the database already exists (Error Code 1007)
         if err.errno == errorcode.ER_DB_CREATE_EXISTS:
-            print(f"Database 'alx_book_store' already exists. No new creation needed.")
+            # If the database already exists, we do nothing and print nothing,
+            # satisfying "should not fail" and "no SELECT/SHOW" and no unexpected output.
+            pass
         else:
             # Handle other connection or database creation errors (e.g., permission denied)
             print(f"Error: Failed to connect to the DB or create database: {err}")
