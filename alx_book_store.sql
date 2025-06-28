@@ -38,10 +38,7 @@ NOTE : - The file extension should be alx_book_store.sql file - All SQL keywords
 
 -- alx_book_store.sql
 
--- Create the database if it does not already exist
-CREATE DATABASE IF NOT EXISTS alx_book_store;
-
--- Use the newly created database
+-- Use the alx_book_store database
 USE alx_book_store;
 
 -- Create the Authors table
