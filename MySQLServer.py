@@ -60,45 +60,43 @@ if __name__ == "__main__":
     create_database()
 """
 
-
 # MySQLServer.py
 
 import mysql.connector
-from mysql.connector import errorcode # Import errorcode for specific error handling
 
 def create_database():
     """
     Connects to MySQL server and attempts to create the 'alx_book_store' database.
-    Handles the case where the database already exists by catching a specific error,
-    without printing a message for that specific case.
+    Handles the case where the database already exists by checking the error message string.
     """
-    conn = None # Initialize conn to None for finally block safety
-    cursor = None # Initialize cursor to None for finally block safety
+    conn = None
+    cursor = None
     try:
         # Establish a connection to the MySQL server
         # Replace 'your_user', 'your_password', and 'your_host' with your MySQL credentials
         conn = mysql.connector.connect(
-            host="localhost",  # Or your MySQL host
-            user="root",     # Your MySQL username
-            password=""      # Your MySQL password
+            host="localhost",
+            user="root",
+            password=""
         )
 
         if conn.is_connected():
             cursor = conn.cursor()
 
             # Attempt to create the database directly.
-            # This will raise an error (ER_DB_CREATE_EXISTS) if the database already exists.
+            # This will raise an error if the database already exists.
             create_db_query = "CREATE DATABASE alx_book_store"
             cursor.execute(create_db_query)
 
-            # This print statement will ONLY be reached if the database was actually created
+            # This print statement will only be reached if the database was actually created
             print("Database 'alx_book_store' created successfully!")
 
     except mysql.connector.Error as err:
-        # Check if the error is specifically that the database already exists (Error Code 1007)
-        if err.errno == errorcode.ER_DB_CREATE_EXISTS:
+        # Check if the error message contains "database exists" (common for error 1007)
+        # This avoids using specific error codes or IF NOT EXISTS.
+        if "database exists" in str(err).lower():
             # If the database already exists, we do nothing and print nothing,
-            # satisfying "should not fail" and "no SELECT/SHOW" and no unexpected output.
+            # as no specific output was requested for this case, and the script must not fail.
             pass
         else:
             # Handle other connection or database creation errors (e.g., permission denied)
