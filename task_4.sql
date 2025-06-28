@@ -13,8 +13,7 @@ All SQL keywords should be in uppercase
 -- Use the alx_book_store database
 USE alx_book_store;
 
--- Retrieve full column details for the 'Books' table from INFORMATION_SCHEMA.COLUMNS.
--- This effectively provides a "full description" without using DESCRIBE or EXPLAIN.
+
 SELECT
     COLUMN_NAME AS Field,
     COLUMN_TYPE AS Type,
