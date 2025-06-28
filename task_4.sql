@@ -13,17 +13,6 @@ All SQL keywords should be in uppercase
 -- Use the alx_book_store database
 USE alx_book_store;
 
-
-SELECT
-    COLUMN_NAME AS Field,
-    COLUMN_TYPE AS Type,
-    IS_NULLABLE AS Null,
-    COLUMN_KEY AS 'Key',
-    COLUMN_DEFAULT AS 'Default',
-    EXTRA AS Extra
-FROM
-    INFORMATION_SCHEMA.COLUMNS
-WHERE
-    TABLE_SCHEMA = 'alx_book_store' AND TABLE_NAME = 'Books'
-ORDER BY
-    ORDINAL_POSITION;
+-- This command shows the CREATE TABLE statement for the 'Books' table.
+-- It provides a comprehensive definition of the table, including all columns and their properties.
+SHOW CREATE TABLE Books;
